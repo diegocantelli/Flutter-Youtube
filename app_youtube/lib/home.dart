@@ -1,3 +1,4 @@
+import 'package:app_youtube/custom_search_delegate.dart';
 import 'package:app_youtube/telas/biblioteca.dart';
 import 'package:app_youtube/telas/em_alta.dart';
 import 'package:app_youtube/telas/inicio.dart';
@@ -31,16 +32,12 @@ class _HomeState extends State<Home> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.videocam),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            onPressed: () {},
+            onPressed: () async {
+              String res = await showSearch(
+                  context: context, delegate: CustomSearchDelegate());
+              print("resultado digitado $res");
+            },
           ),
         ],
       ),
