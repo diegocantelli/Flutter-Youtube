@@ -1,6 +1,7 @@
 import 'package:app_youtube/api.dart';
 import 'package:app_youtube/models/video.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 class Inicio extends StatefulWidget {
   String pesquisa;
@@ -32,22 +33,31 @@ class _InicioState extends State<Inicio> {
                 itemBuilder: (context, index) {
                   List<Video> videos = snapshot.data;
                   Video video = videos[index];
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                        height: 200,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(video.imagem),
+                  return GestureDetector(
+                    onTap: () {
+                      FlutterYoutube.playYoutubeVideoById(
+                          apiKey: CHAVE_YOUTUBE_API,
+                          videoId: video.id,
+                          autoPlay: true,
+                          backgroundColor: Colors.black);
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(video.imagem),
+                            ),
                           ),
                         ),
-                      ),
-                      ListTile(
-                        title: Text(video.titulo),
-                        subtitle: Text(video.canal),
-                      ),
-                    ],
+                        ListTile(
+                          title: Text(video.titulo),
+                          subtitle: Text(video.canal),
+                        ),
+                      ],
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) => Divider(
