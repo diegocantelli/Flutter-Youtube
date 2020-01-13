@@ -24,7 +24,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         Icons.arrow_back,
       ),
       onPressed: () {
-        close(context, null);
+        close(context, "Android");
       },
     );
   }

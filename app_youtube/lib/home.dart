@@ -14,11 +14,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _indiceAtual = 0;
-
-  List<Widget> telas = [Inicio(), EmAlta(), Inscricoes(), Biblioteca()];
+  String _resultado;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> telas = [
+      Inicio(_resultado),
+      EmAlta(),
+      Inscricoes(),
+      Biblioteca()
+    ];
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -36,7 +42,9 @@ class _HomeState extends State<Home> {
             onPressed: () async {
               String res = await showSearch(
                   context: context, delegate: CustomSearchDelegate());
-              print("resultado digitado $res");
+              setState(() {
+                _resultado = res;
+              });
             },
           ),
         ],
